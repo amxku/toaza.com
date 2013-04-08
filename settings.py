@@ -3,7 +3,10 @@
 #
 # run sittings
 # toaza.com
+# amxku@sebug.net
 #
+#
+
 import os.path
 
 settings = {
