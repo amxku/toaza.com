@@ -1,0 +1,29 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># {{ title }} ( Total: {{ aTotal }} )</h3>
+    <span class="right"><a class="aherfa" href="/zzginoa/comments">回复</a></span>
+    <div class="sep10"></div><div class="sep10"></div>
+    <hr>
+    <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tr class="head">
+            <td width="30"><input type="checkbox"></td>
+            <td width="60">user</td>
+            <td width="230">title</td>
+            <td>comment</td>
+            <td width="120">time</td>
+            <td width="20">OP</td>
+        </tr>
+        {%for itema in comments%}
+            <tr class="{{ loop.cycle('rowb','rowa') }}">
+                <td>{{ itema.cid }}</td>
+                <td><a target="_blank" href="/u/{{ itema.username | e }}">{{ itema.username | e }}</a></td>
+                <td><a href="/a/{{itema.aid}}#reply{{ itema.cid }}" target="_blank">{{ itema.title[0:25] }}</a></td>
+                <td>{{ itema.content[0:30] }}</td>
+                <td class="fsz10">{{ itema.cptime|setdateo('2') }}</td>
+                <td><a onclick="return confirm('您确定删除');" href="/zzginoa/comments:del?id={{ itema.cid }}&token={{ access_token }}">D</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="sep10"></div>
+    {% include '_pages.html' %}
+{% endblock body %}

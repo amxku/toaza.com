@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+{% block body %}
+    <div id="inner">
+        {% if gnauid %}<div id="nava"><span class="right"><a class="aherfa" href="/newpost?token={{ access_token }}">+推新</a></span></div><div class="sep5"></div>{%endif%}
+        {%for itema in articles%}<div id="thread" class="clearfix thread"><div class="left"><a href="/u/{{ itema.username | e }}" class="imga"><img alt="{{ itema.username | e }}" border="0" width="48" height="48" class="avatar lazy" src="{{imgUrl}}/static/grey.gif" data-original="{{imgUrl}}/avatar/{% if itema.isavatar %}{{itema.uid}}{%else%}avatar{%endif%}.png!48.png?u={{ itema.isavatar }}"></a></div><div class="user-txtInfo left thread-a"><a href="/a/{{itema.aid}}" title="{{ itema.title }}"><span class="thread-t">{{ itema.title|truncate(length=50,killwords=True,end='...') }}</span></a><div class="thread-i"><a href="/u/{{ itema.username | e }}">{{ itema.username | e }}</a>&nbsp;•&nbsp;{{ itema.lastctime|setdateo('2') }}{% if itema.comtotal %}&nbsp;•&nbsp;<span class="rc-num"> {{ itema.comtotal }} </span>个回复{% endif %}{% if nodes %}&nbsp;•&nbsp;{% for ni in nodes %}{% if itema.aid == ni.aid %}<a class="taga" href="/n/{{ ni.nUrl }}" title="{{ ni.nName }}">{{ ni.nName }}</a>&nbsp;{% endif %}{% endfor %}{% endif %}</div></div></div>{%endfor%}
+        <div class="sep20"></div>{% include '_pages.html' %}<div class="sep5"></div>
+    </div>
+{% endblock body %}
+{% block sideb %}
+    {% include '_side_userinfo.html' %}
+    {% include '_side_sitestat.html' %}
+{% endblock sideb %}

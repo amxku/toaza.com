@@ -1,0 +1,1 @@
+{% if Totalp>1 %}<center>{% if thisp>1 %}<a href="{% if thisp==2 %}{{ f1page }}{% else %}{{ f1page }}{{ f1pagewa }}p={{ thisp-1 }}{% endif %}"> < Prev</a>{% endif %}&nbsp;&nbsp;&nbsp;{{ thisp }} / {{ Totalp }}&nbsp;&nbsp;&nbsp;{% if Totalp>thisp %}<a href="{{ f1page }}{{ f1pagewa }}p={{ thisp+1 }}">Next > </a>{% endif %}</center>{% endif %}

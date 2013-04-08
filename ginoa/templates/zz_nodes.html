@@ -1,0 +1,42 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+<script type="text/javascript">
+    var class_array = new Array();
+    class_array = [{% for ci in classs %}{'nid':'{{ ci.nid }}','name':'{{ ci.nName }}'},{% endfor %}]
+</script>
+    <h3># {{ title }} ( Total: {{ nTotal }} )</h3>
+    <span class="right">{% if op == 'nosub' %}<a href="/zzginoa/nodes">已归档</a>{% else %}<a href="/zzginoa/nodes?op=nosub">未归档</a>{% endif %} • {% if nType == 'C' %}<a href="/zzginoa/nodes?op=index&amp;nType=N">节点</a> • <a href="./?op=flush_class_total&next=/zzginoa/nodes?nType=C">刷新分类</a>{% else %}<a href="/zzginoa/nodes?op=index&amp;nType=C">分类</a> • <a href="./?op=flush_node_total&next=/zzginoa/nodes">刷新节点</a>{% endif %} • <a href="/zzginoa/nodes?op=add">添加</a></span>
+    <div class="sep10"></div><div class="sep10"></div>
+    <hr>
+    <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tr class="head">
+            <td width="10"><input type="checkbox"></td>
+            <td width="110">Name</td>
+            <td width="80">Url</td>
+            <td>Des</td>
+            <td width="80">sub</td>
+            <td width="40">Cou</td>
+            <td width="30">OP</td>
+        </tr>
+        {% for n in nodes %}
+            <tr class="{{ loop.cycle('rowb','rowa') }}">
+                <td>{{ n.nid }}</td>
+                <td><a href="/n/{{ n.nUrl }}" target="_blank">{{ n.nName }}</a></td>
+                <td>{{ n.nUrl }}</td>
+                <td class="fsz10">{% if n.nDes %}{{ n.nDes[0:40] }}{% endif %}</td>
+                <td>{% if n.subhead %}<script type="text/javascript">
+                        for (i=0;i<class_array.length;i++){
+                            if (class_array[i]['nid'] == {{ n.subhead }}){
+                                document.write(class_array[i]['name']);
+                            }
+                        }
+                    </script>{% endif %}
+                </td>
+                <td>{{ n.nCou }}</td>
+                <td><a href="/zzginoa/nodes?op=edit&nid={{ n.nid }}">E</a>&nbsp;•&nbsp;<a href="#">D</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="sep10"></div>
+    {% include '_pages.html' %}
+{% endblock body %}

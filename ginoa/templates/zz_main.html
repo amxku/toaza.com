@@ -1,0 +1,17 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># 快捷操作</h3>
+    <a href="./?op=flush_node_total&next=./">刷新节点</a> • <a href="./?op=flush_class_total&next=./">刷新分类</a>
+    <hr>
+    <h3># 数据统计</h3>
+    <span class="gray">用户</span> : {{user_Count}} &nbsp;&nbsp;• •&nbsp;&nbsp;
+    <span class="gray">主题</span> : {{article_Count}} &nbsp;&nbsp;• •&nbsp;&nbsp;
+    <span class="gray">回复</span> : {{comments_Count}} &nbsp;&nbsp;• •&nbsp;&nbsp;
+    <span class="gray">标签</span> : {{nodes_Count}} &nbsp;&nbsp;• •&nbsp;&nbsp;
+    <span class="gray">日志</span> : {{logs_Count}}
+    <hr>
+    <h3># 程序信息</h3>
+    当前版本: {{ SITE_VERSION }} <br>
+    程序开发: <a href="http://luoq.net">amxku@sebug.net</a> <br>
+    官方主页: <a href="http://toaza.com">http://toaza.com</a>
+{% endblock body %}

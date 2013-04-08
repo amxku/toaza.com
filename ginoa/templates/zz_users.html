@@ -1,0 +1,35 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># {{ title }} (Total:{{ uTotal }})</h3>
+    <span class="right"><a href="/zzginoa/users">normal</a> • <a href="/zzginoa/users?op=index&norclo=2">clock</a></span>
+    <div class="sep10"></div><div class="sep10"></div>
+    <hr>
+    <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tr class="head">
+            <td width="30">ID</td>
+            <td width="120">Name</td>
+            <td width="150">mail</td>
+            <td width="120">regtime</td>
+            <td>website</td>
+            <td>location</td>
+            <td width="20">ico</td>
+            <td width="50">flag</td>
+            <td width="40">OP</td>
+        </tr>
+        {% for u in users %}
+            <tr class="{{ loop.cycle('rowb','rowa') }}">
+                <td class="fsz10">{{ u.uid }}</td>
+                <td><a href="/u/{{ u.username }}" target="_blank">{{ u.username }}</a></td>
+                <td>{% if u.email %}{{ u.email }}{% else %}{{ u.sinaid }}{% endif %}</td>
+                <td>{{ u.regtime|setdateo('2') }}</td>
+                <td>{{ u.item.website }}</td>
+                <td>{{ u.item.location }}</td>
+                <td>{% if u.isavatar %}<span style="color:red">Y</span>{% else %}N{% endif %}</td>
+                <td>{{ u.flag }}</td>
+                <td><a href="/zzginoa/users?op=edit&uid={{ u.uid }}">E</a>{% if u.uid!=1 %}&nbsp;•&nbsp;{% if u.flag == 'clock' %}<a href="/zzginoa/users?op=dounclock&uid={{ u.uid }}">unc</a>{% else %}<a href="/zzginoa/users?op=doclock&uid={{ u.uid }}">clo</a>{% endif %}{% endif %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="sep10"></div>
+    {% include '_pages.html' %}
+{% endblock body %}

@@ -1,0 +1,17 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># {{ title }}</h3>
+    <hr>
+    <form action="" method="post">
+        {{xsrf_form_html()}}
+        <input type="hidden" name="uid" value="{{ user.uid }}"/>
+        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+            <tr>
+                <td width="80">用户名</td>
+                <td><input value="{{ user.username }}" class="sl" name="username"></td>
+            </tr>
+        </table>
+        <div class="sep10"></div>
+        <button type="submit">保存推出去</button>
+    </form>
+{% endblock body %}

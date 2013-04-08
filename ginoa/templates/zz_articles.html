@@ -1,0 +1,27 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># {{ title }} ( Total: {{ aTotal }} )</h3>
+    <span class="right"><a class="aherfa" href="/zzginoa/articles">主题</a></span>
+    <div class="sep10"></div><div class="sep10"></div>
+    <hr>
+    <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tr class="head">
+            <td width="30"><input type="checkbox"></td>
+            <td width="100">user</td>
+            <td>title</td>
+            <td width="120">time</td>
+            <td width="50">reply</td>
+        </tr>
+        {%for itema in articles%}
+            <tr class="{{ loop.cycle('rowb','rowa') }}">
+                <td>{{ itema.aid }}</td>
+                <td><a target="_blank" href="/u/{{ itema.username | e }}">{{ itema.username | e }}</a></td>
+                <td><a href="/a/{{itema.aid}}" target="_blank">{{itema.title}}</a></td>
+                <td class="fsz10">{{ itema.aptime|setdateo('2') }}</td>
+                <td>{{ itema.comtotal }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="sep10"></div>
+    {% include '_pages.html' %}
+{% endblock body %}

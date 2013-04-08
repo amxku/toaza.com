@@ -1,0 +1,68 @@
+{% extends '_base.html' %}
+{% block body %}
+<div id="nava">
+    <strong># <a class="aherfb" href="/">{{ SITE_NAME }}</a></strong> <span class="chevron">&nbsp;›&nbsp;</span> {{ title | e }}
+</div>
+<div id="inner">
+    <strong># 基本信息</strong>
+    <form action="/settings" method="post">
+    {{xsrf_form_html()}}
+    <table width="100%" cellspacing="0" cellpadding="5" border="0">
+        <tr>
+            <td width="60" align="right"><span class="gray">用户名</span></td>
+            {% if user_c_info.isnofrist == 'F' %}
+                <td width="auto" align="left"><input type="text" value="{{ gnaname | e }}" name="username" class="sl">&nbsp;&nbsp;请使用 a-z(A-Z) 或 0-9</td>
+            {%else%}
+                <td width="auto" align="left"><strong>{{ gnaname | e }}</strong></td>
+            {%endif%}
+        </tr>
+        <tr>
+            <td align="right"><span class="gray">个人网站</span></td>
+            <td width="auto" align="left"><input type="text" value="{{ user_c_info.item.website }}" name="website" class="sl"></td>
+        </tr>
+        <tr>
+            <td align="right"><span class="gray">所在地</span></td>
+            <td width="auto" align="left"><input type="text" value="{{ user_c_info.item.location }}" name="location" class="sl"></td>
+        </tr>
+        <tr>
+            <td align="right"><span class="gray">签名</span></td>
+            <td width="auto" align="left"><input type="text" value="{{ user_c_info.item.tagline }}" name="tagline" class="sl"></td>
+        </tr>
+        <tr>
+            <td align="right"><span class="gray">个人简介</span></td>
+            <td width="auto" align="left"><textarea name="bio" class="ml">{{ user_c_info.item.bio }}</textarea></td>
+        </tr>
+        <tr>
+            <td colspan=2 width="auto" align="left"><button type="submit">保存设置</button></td>
+        </tr>
+    </table>
+    </form>
+    <hr>
+    <strong id="avatar"># 头像上传</strong>
+    <form action="/settings:avatar" enctype="multipart/form-data" method="post">
+    {{xsrf_form_html()}}
+        <table width="100%" cellspacing="0" cellpadding="5" border="0">
+            <tr>
+                <td width="60" align="right"><span class="gray">当前头像</span></td>
+                <td width="auto" align="left">
+                    <img width="72" border="0" class="avatar" src="{{imgUrl}}/avatar/{% if user_c_info.isavatar %}{{gnauid}}{%else%}avatar{%endif%}.png!72.png?u={{ user_c_info.isavatar }}">
+                </td>
+            </tr>
+            <tr>
+                <td align="right"><span class="gray">选择图片</span></td>
+                <td width="auto" align="left"><input type="file" name="avatar" class="sl"></td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td width="auto" align="left"><span class="gray">支持 2MB 以内的 PNG / JPG / GIF 文件</span></td>
+            </tr>
+            <tr>
+                <td colspan=2 width="auto" align="left"><button type="submit">上传新头像</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock body %}
+{% block sideb %}
+    {% include '_side_userinfo.html' %}
+{% endblock sideb %}

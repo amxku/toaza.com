@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+{% block body %}
+<div id="inner">
+    <div class="clearfix">
+        <div class="left">
+            <img  width="72" alt="{{ authorinfo.username | e }}" border="0" class="avatar" src="{{imgUrl}}/avatar/{% if authorinfo.isavatar %}{{useravatar}}{%else%}avatar{%endif%}.png!72.png?u={{ authorinfo.isavatar }}">
+        </div>
+       <div class="user-txtInfo left">
+           <span class="sfa">{{ authorinfo.username | e }}</span>
+           <div class="user-gray user-gray2">{{ authorinfo.item.tagline }}</div>
+           <strong>{{ SITE_NAME }}</strong> 第 <strong>{{ authorinfo.uid }}</strong> 号战将，加入于 {{ authorinfo.regtime|setdateo('2') }}
+       </div>
+    </div>
+    <div class="sep10"></div>
+    {% if authorinfo.item.website %}<span class="gray">#网站: &nbsp;&nbsp;</span><a href="{{ authorinfo.item.website }}" target="_blank">{{ authorinfo.item.website }}</a><br>{%endif%}
+    {% if authorinfo.item.location %}<span class="gray">#现居: &nbsp;&nbsp;</span>{{ authorinfo.item.location }}{%endif%}
+    <div class="sep10"></div>
+    {% if authorinfo.item.bio %}{{ authorinfo.item.bio|content_formate|nl2br }}{%endif%}
+    <hr>
+    {% if logs %}
+        <strong>＃{{ authorinfo.username | e }} 动态</strong>
+        {% for ai in logs %}
+            <div class="clearfix thread">
+                <div class="vustime">{{ ai.optime|setdateo('4') }}</div>&nbsp;<span class="gray"> {% if ai.optype =='article' %}发布新主题 </span>&nbsp;<a href="/a/{{ ai.aid }}">{{ ai.title }}</a><br />&nbsp;&nbsp;{% for ni in anodes %}{% if ni.aid == ai.aid %}<a class="taga" href="/n/{{ ni.nUrl }}" title="{{ ni.nName }}">{{ ni.nName }}</a>&nbsp;{% endif %}{% endfor %}{% endif %}{% if ai.optype =='comments' %}参与讨论 </span>&nbsp;<a href="/a/{{ ai.aid }}#reply{{ ai.cid }}">{{ ai.title }}</a><br />&nbsp; {% if ai.content %}{{ ai.content|truncate(length=45,killwords=True,end='...')|content_formate }}{% endif %}{% endif %}
+            </div>
+        {% endfor %}
+    {% else %}<span class="gray">#none</span>{% endif %}
+</div>
+{% endblock body %}

@@ -1,0 +1,42 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># {{ title }}</h3>
+    <hr>
+    <form action="" method="post">
+        {{xsrf_form_html()}}
+        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+            <tr>
+                <td width="80">节点名称</td>
+                <td><input value="{{ node.nName }}" class="sl" name="nName" placeholder="Name..."></td>
+            </tr>
+            <tr>
+                <td>节点URL</td>
+                <td>
+                    <input value="{{ node.nUrl }}" class="sl" name="nUrl" placeholder="Url..."></td>
+            </tr>
+            {% if node.nType == 'N' or not node.nid %}
+                <tr>
+                    <td>节点分类</td>
+                    <td>
+                        <select name="subhead">
+                            <option value="0">---系统分类---</option>
+                        {% for c in classs %}
+                            <option value="{{ c.nid }}" {% if node.subhead==c.nid %}selected=""{% endif %}>{{ c.nName }}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td>节点说明</td>
+                <td><textarea name="nDes" class="ml mlc" placeholder="Des...">{{ node.nDes }}</textarea></td>
+            </tr>
+            <tr>
+                <td>节点类型</td>
+                <td><input type="checkbox" {% if node.nType =='C' %}checked{% endif %} value="C" name="nType"> 分类</td>
+            </tr>
+        </table>
+        <div class="sep10"></div>
+        <button type="submit">保存推出去</button>
+    </form>
+{% endblock body %}

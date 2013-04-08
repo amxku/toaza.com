@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% block body %}
+    <div id="nava"><strong># <a class="aherfb" href="/">{{ SITE_NAME }}</a></strong> <span class="chevron">&nbsp;›&nbsp;</span> {{ title | e }}</div>
+    <div id="inner">
+    {% if lids %}
+        {% for ai in lids %}
+            <div class="clearfix thread">
+                <div class="left"><a href="/u/{{ ai.username | e }}" class="imga"><img alt="{{ ai.username | e }}" border="0" width="24" height="24" class="avatar lazy" src="{{imgUrl}}/static/grey.gif" data-original="{{imgUrl}}/avatar/{% if ai.isavatar %}{{ai.uid}}{%else%}avatar{%endif%}.png!24.png?u={{ ai.isavatar }}"></a></div>&nbsp;&nbsp;
+                <a href="/u/{{ ai.username }}">{{ ai.username }}</a><span class="gray"> {% if ai.atype =='1' %} 在 {% else %} 在回复 {% endif %}</span><a href="/a/{{ ai.aid }}#reply{{ ai.cid }}">{{ ai.title }}</a><span class="gray">{% if ai.atype =='1' %} 里回复了你  {% else %} 时提到了你 {% endif %}&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;{{ ai.optime|setdateo('2') }}</span>
+            <span class="fsz11">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/user:alerts:del?id={{ ai.crid }}&token={{ access_token }}">删除</a></span>
+            </div>
+        {% endfor %}
+    {% else %}None{% endif %}
+        <div class="sep10"></div><div class="sep20"></div>
+    </div>
+{% endblock body %}
+{% block sideb %}
+    {% include '_side_userinfo.html' %}
+{% endblock sideb %}

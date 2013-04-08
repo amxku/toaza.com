@@ -1,0 +1,42 @@
+{% extends '_base.html' %}
+{% block body %}
+<div id="inner">
+    <h2 class="thread-title">{{ article.title }}</h2>
+    {%if nodes %}<div id="anodes">{% for nt in nodes %}<a class="taga" href="/n/{{nt.nUrl}}" title="{{nt.nName}}">#{{nt.nName}}</a>&nbsp;{% endfor %}</div>{% endif %}
+    <small class="gray">By <a href="/u/{{ auser.username }}">{{ auser.username }}</a> at {{ article.aptime|setdateo('2') }}</small>
+    {% if (gnauid == article.uid and nowtime-article.aptime<1800) or gnaflag =='675'%}
+        &nbsp;&nbsp;<a class="aherfa fsz11" href="/newpost?id={{ article.aid }}&token={{ access_token }}">编辑</a>&nbsp;•&nbsp;<a class="aherfa fsz11" onclick="return confirm('您确定删除');" href="/post:del?id={{ article.aid }}&token={{ access_token }}">删除</a>
+    {% endif %}
+    <div class="sep10"></div>
+    {{ article.content|content_formate|nl2br }}
+    <div class="sep10"></div>
+</div>
+<hr>
+{%if comments %}
+{% for item in comments %}
+    {%if loop.first %}#{{ loop.length }}{% endif %}
+    <div id="reply{{ item.cid }}" class="comment"{% if gnauid %} onmouseover="$('#reB{{ item.cid }}').show()" onmouseout="$('#reB{{ item.cid }}').hide()"{% endif %}>
+        <div class="commentfr right">{% if gnauid %} <span class="replyBtn" id="reB{{ item.cid }}"><a onclick="replyOne('{{ item.username | e }}')" href="javascript:void(0)" class="aherfa">回复</a></span>{% endif %}&nbsp;&nbsp;#{{ loop.index }}</div>
+        <div class="comment_data"><img  width="48" height="48" alt="{{ item.username | e }}" border="0" class="avatar comment_img lazy" src="{{imgUrl}}/static/grey.gif" data-original="{{imgUrl}}/avatar/{% if item.isavatar %}{{item.uid}}{%else%}avatar{%endif%}.png!48.png?u={{ item.isavatar }}"><span class="author"><a href="/u/{{ item.username }}">{{ item.username }}</a>{% if item.item.tagline %}&nbsp;&nbsp;&nbsp;<small class="gray">＃{{ item.item.tagline|truncate(length=30,killwords=True,end='..') }}</small>{% endif %}</span><small class="gray">{{ item.cptime|setdateo('2') }}</small></div>
+        <div class="cmcontent">{{ item.content|content_formate|nl2br }}</div>
+    </div>
+    {% endfor %}
+<div class="sep20"></div>
+{% endif %}
+{% if gnauid %}
+    <span class="gray"># 添加一条新回复</span>
+    <div class="sep10"></div>
+    <form action="/newcomment" method="post">
+        {{xsrf_form_html()}}
+        <input type="hidden" name="aid" value="{{ article.aid }}"/>
+        <textarea name="comment" class="ml mlcom" id="reply_content"></textarea>
+        <div class="sep10"></div>
+        <button type="submit">保存回复</button><span class="gray right sept10"># 请尽量让自己的回复能够对别人有帮助</span>
+    </form>
+{%else%}
+<div class="transparent"><center><h4>#<a class="aherfa logina" href="javascript:void(0);">登录</a> 后才能参与评论</h4></center></div>
+{% endif %}
+{% endblock body %}
+{% block sideb %}
+    {% include '_side_userinfo.html' %}
+{% endblock sideb %}

@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+{% block body %}
+<script type="text/javascript" charset="utf-8">
+    var custom_array = new Array();
+    custom_array = [{% for ts in tagsnodes %}'{{ ts.nName|lower }}',{% endfor %}];
+</script>
+<script type="text/javascript" charset="utf-8">
+    document.write("<script type='text\/javascript' charset='utf-8' src='" + as.ajs[0] + "?v=" + as.version + "'><\/script>");
+    {% if not articlee.aid %}
+    document.write("<script type='text\/javascript' charset='utf-8' src='" + as.ajs[1] + "?v=" + as.version + "'><\/script>");
+    {% endif %}
+</script>
+<div id="inner">
+    <div id="nava"><strong>#{{ title | e }}</strong></div>
+    <form action="/newpost" method="post">
+        {{xsrf_form_html()}}
+        <input type="hidden" name="id" value="{{articlee.aid}}"/>
+        <textarea name="title" id="title" class="ml mlt" placeholder="title..." onblur="checktag()">{{articlee.title}}</textarea>
+        <div class="sep10"></div>
+        <textarea name="atag" id="nodesortag" class="ml mltag" onfocus="simple_ac_init('nodesortag', 'taghint')" placeholder="node or tags...">{%if nodes %}{% for nt in nodes %}{{nt.nName}},{% endfor %}{% else %}{{ nnodeid }}{% endif %}</textarea>
+        <span id="taghint"></span>
+        <div class="sep10"></div>
+        <textarea name="content" class="ml mlc" placeholder="content...">{{articlee.content}}</textarea>
+        <div class="sep10"></div>
+        <button type="submit">保存推出去</button>
+    </form>
+</div>
+<hr>
+<div id="inner" style="border:0;">
+    <h2>主题创建指南</h2>
+    <h3>信息 &nbsp; <span class="gray">Make Sense</span></h3>
+    为了让大家在 {{ SITE_NAME }} 上的时间更有效率，请参考：<div class="sep5"></div>
+    <ul>
+        <li>图片：直接帖URL就好</li><div class="sep5"></div>
+        <li>gist：直接帖地址，如：https://gist.github.com/3979761</li><div class="sep10"></div>
+        <li>欢迎你在这里分享你在网上看到的有趣事物，因为 {{ SITE_NAME }} 是一个主要关于编程和设计的社区，所以这类技术话题在 {{ SITE_NAME }} 大家会更感兴趣；非常欢迎你在这里发布自己的新作品，我们大家都非常乐意去尝试你的新作。需要注意的是，发布作品请在 <a href="/n/create">分享创造</a> 节点，而非其他节点</li><div class="sep5"></div>
+        <li>有任何问题请到 <a href="/n/toaza">{{ SITE_NAME }}</a> 节点</li>
+    </ul>
+</div>
+{% endblock body %}
+{% block sideb %}
+    {% include '_side_userinfo.html' %}
+{% endblock sideb %}

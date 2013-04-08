@@ -1,0 +1,37 @@
+{% extends '_adminBase.html' %}
+{% block body %}
+    <h3># {{ title }} ( Total: {{ aTotal }} )</h3>
+    <span class="right"><a class="aherfa" href="/zzginoa/logs">日志</a> • <a href="/zzginoa/logs?op=del:login&token={{ access_token }}">删除登录日志</a></span>
+    <div class="sep10"></div><div class="sep10"></div>
+    <hr>
+    <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tr class="head">
+            <td width="30"><input type="checkbox"></td>
+            <td width="100">user</td>
+            <td>title</td>
+            <td width="120">time</td>
+            <td width="100">ipadd</td>
+        </tr>
+        {%for itema in logs%}
+            <tr class="{{ loop.cycle('rowb','rowa') }}">
+                <td>{{ itema.lid }}</td>
+                <td><a target="_blank" href="/u/{{ itema.username | e }}">{{ itema.username | e }}</a></td>
+                <td>
+                    {{itema.des}}
+                    {% if itema.aid %}->
+                        {% if itema.cid %}
+                            <a target="_blank" href="/a/{{ itema.aid }}#reply{{ itema.cid }}">
+                        {% else %}
+                            <a target="_blank" href="/a/{{ itema.aid }}">{% endif %}{{ itema.title|truncate(length=35,killwords=True,end='..') }}</a>
+                        {% endif %}
+                        {% if itema.puid %}-> <a href="/zzginoa/users?op=edit&uid={{ itema.puid }}">{{ itema.puid }}</a>{% endif %}
+                        {% if itema.nid %}-> <a target="_blank" href="/n/{{ itema.nUrl }}">{{ itema.nName }}</a>{% endif %}
+                </td>
+                <td class="fsz10">{{ itema.optime|setdateo('2') }}</td>
+                <td>{{ itema.ipadds }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="sep10"></div>
+    {% include '_pages.html' %}
+{% endblock body %}

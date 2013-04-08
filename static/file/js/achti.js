@@ -1,0 +1,1 @@
+function checktag(){var e=$("#title").val().toLowerCase(),t=$("#nodesortag"),n=t.val(),r="";for(i=0;i<custom_array.length;i++)e.search(custom_array[i])!=-1&&(r+=custom_array[i]+",");n.length>0?(t.focus(),t.val(n+","+r)):(t.focus(),t.val(r))}
