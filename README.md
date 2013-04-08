@@ -4,4 +4,4 @@ Project Toaza is a Simple Forum. It's written in Python, and open sourced under 
 2. jinja2
 3. sqlalchemy
 
-toaza.com
+See also: http://toaza.com/
