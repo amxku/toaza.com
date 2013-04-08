@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# run
+#
+# toaza.com
+# amxku@sebug.net（2012/9）
+#
 #
 import sys,os
 
