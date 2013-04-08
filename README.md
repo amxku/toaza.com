@@ -1,8 +1,10 @@
 toaza.com
 =========
 
-#tornado
-#jinja2
-#sqlalchemy
+Project Toaza is a Simple Forum. It's written in Python, and open sourced under GPLv2.
+
+1. tornado
+2. jinja2
+3. sqlalchemy
 
 toaza.com
