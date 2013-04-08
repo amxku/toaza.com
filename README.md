@@ -1,6 +1,3 @@
-toaza.com
-=========
-
 Project Toaza is a Simple Forum. It's written in Python, and open sourced under GPLv2.
 
 1. tornado
