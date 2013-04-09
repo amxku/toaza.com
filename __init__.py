@@ -5,5 +5,5 @@
 #
 
 gnaName = 'ginoa'
-gnaVersion = '0.2'
+gnaVersion = '0.1'
 
