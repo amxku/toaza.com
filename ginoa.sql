@@ -6,7 +6,6 @@
  Target Server Type    : MySQL
  Target Server Version : 50154
  File Encoding         : utf-8
-
 */
 
 SET NAMES utf8;
