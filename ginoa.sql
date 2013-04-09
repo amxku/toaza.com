@@ -1,17 +1,12 @@
 /*
- Navicat Premium Data Transfer
-
- Source Server         : sebug.net
  Source Server Type    : MySQL
  Source Server Version : 50154
- Source Host           : cn.sebug.net
  Source Database       : ginoa
 
  Target Server Type    : MySQL
  Target Server Version : 50154
  File Encoding         : utf-8
 
- Date: 04/08/2013 19:22:36 PM
 */
 
 SET NAMES utf8;
