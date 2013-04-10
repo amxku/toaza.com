@@ -2,8 +2,6 @@
 # -*- coding:utf-8 -*-
 #
 #
-#
-
 gnaName = 'ginoa'
-gnaVersion = '0.1'
+gnaVersion = '0.1(13D02)'
 

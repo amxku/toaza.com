@@ -23,7 +23,7 @@ except:
     port = '1818'
 
 def main():
-    #tornado.options.parse_command_line()
+    tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(tornado.web.Application(urls,**settings), xheaders=True)
     #http_server.listen(port,'0.0.0.0')
     http_server.listen(port,'127.0.0.1')
