@@ -4,4 +4,3 @@
 #
 gnaName = 'ginoa'
 gnaVersion = '0.1(13D02)'
-
