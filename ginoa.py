@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# run
+# run site
 #
 # toaza.com
 # amxku@sebug.net（2012/9）
