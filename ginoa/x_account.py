@@ -48,11 +48,12 @@ class signin_sina(RequestHandler, WeiboMixin):
                 self.authorize_redirect(
                     redirect_uri=redirect_uri,
                     client_id=SINA_CONSUMER_KEY,
-                    extra_params={"response_type": "code","state": next},
+                    extra_params={"response_type": "code", "state": next},
                 )
 
         else:
-            self.get_error('/','10',u'系统禁止登录',SITE_NAME)
+            self.get_error('/', '10', u'系统禁止登录', SITE_NAME)
+
 
 #sina callback
 class sina_callbackpage(RequestHandler,WeiboMixin):
@@ -288,18 +289,19 @@ class alertsdel(RequestHandler):
             self.get_error('/','10',u'参数异常',SITE_NAME)
             return
         if crid:
-            crds = Commentreid().select(['uid','crid']).find_by_crid(crid)
+            crds = Commentreid().select(['uid', 'crid']).find_by_crid(crid)
             if crds:
                 if self.session['gnauid'] == crds.uid:
                     crds.delete()
-                    self.logaw('setting',u'删除提醒消息','0',crds.crid,'0','0') #记录日志(type,des,aid,cid,nid,puid)
+                    self.logaw('setting', u'删除提醒消息', '0', crds.crid, '0', '0')
+                    #记录日志(type,des,aid,cid,nid,puid)
                     self.get_error('/user:alerts','4',u'删除成功',SITE_NAME)
                     return
                 else:
-                    self.get_error('/','4',u'error',SITE_NAME)
+                    self.get_error('/', '4', u'error', SITE_NAME)
                     return
             else:
-                self.get_error('/','10',u'参数异常',SITE_NAME)
+                self.get_error('/', '10', u'参数异常', SITE_NAME)
                 return
         else:
             self.get_error('/', '4', u'error', SITE_NAME)
