@@ -13,10 +13,10 @@ urls = [
     (r"/newpost", ginoa.x_views.newpost),
     (r"/post:del", ginoa.x_views.delpost),
     (r"/a/(\d+)", ginoa.x_views.ashow),
-    (r"/newcomment",ginoa.x_views.newcomment),
-    (r"/n/([^/]+)",ginoa.x_views.nlists),
-    (r"/recent",ginoa.x_views.listrecent),
-    
+    (r"/newcomment", ginoa.x_views.newcomment),
+    (r"/n/([^/]+)", ginoa.x_views.nlists),
+    (r"/recent", ginoa.x_views.listrecent),
+    #
     (r"/signout", ginoa.x_account.signout),
     (r"/:signin", ginoa.x_account.signin),
     (r"/:signin:sina", ginoa.x_account.signin_sina),

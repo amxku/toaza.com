@@ -6,12 +6,14 @@
 #
 import tornado.auth
 from base import RequestHandler
-from helpers import pickle_dumps,pickle_loads
+from helpers import pickle_dumps, pickle_loads
 from tornado.escape import xhtml_escape
 from site_sitting import *
 from extensions.upyun import UpYun
-from model.testm import User,Article,Log,Commentreid,Comment,Noderelated,Node # db model (sqlalchemy)
 from model.authmixin import WeiboMixin
+from model.testm import User, Article, Log, Commentreid, Comment, Noderelated, Node
+# db model (sqlalchemy)
+
 
 # 退出
 class signout(RequestHandler):
@@ -23,29 +25,29 @@ class signout(RequestHandler):
         self.session.save()
         self.redirect(self.get_argument("next", "/"))
 
+
 # 账号登录
 #todo 账号合并
 class signin(RequestHandler):
     def get(self):
         title = u'用户登录'
-        countent = self.render_template('user_login.html',
-            title = title,
-        )
+        countent = self.render_template('user_login.html', title=title,)
         self.write(countent)
 
+
 # sina用户登录
-class signin_sina(RequestHandler,WeiboMixin):
+class signin_sina(RequestHandler, WeiboMixin):
     @tornado.web.asynchronous
     def get(self):
         if CHECK_LOGIN == 1:
-            next = self.get_argument("next",None)
+            next = self.get_argument("next", None)
             redirect_uri = SINA_redirect_uri
             code = self.get_argument("code", None)
 
             if not code:
                 self.authorize_redirect(
-                    redirect_uri = redirect_uri,
-                    client_id = SINA_CONSUMER_KEY,
+                    redirect_uri=redirect_uri,
+                    client_id=SINA_CONSUMER_KEY,
                     extra_params={"response_type": "code","state": next},
                 )
 
@@ -300,6 +302,6 @@ class alertsdel(RequestHandler):
                 self.get_error('/','10',u'参数异常',SITE_NAME)
                 return
         else:
-            self.get_error('/','4',u'error',SITE_NAME)
+            self.get_error('/', '4', u'error', SITE_NAME)
             return
 
