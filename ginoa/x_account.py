@@ -304,4 +304,3 @@ class alertsdel(RequestHandler):
         else:
             self.get_error('/', '4', u'error', SITE_NAME)
             return
-
