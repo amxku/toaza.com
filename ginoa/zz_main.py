@@ -12,10 +12,11 @@ from helpers import clear2nbsp, pickle_loads, checkuserflag
 from model.testm import User, Article, Comment, Node, Noderelated, Log, Commentreid
 # db model (sqlalchemy)
 
+
 class zz_index(RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        if self.session['gnaflag'] <> '675':
+        if self.session['gnaflag'] != '675':
             raise tornado.web.HTTPError(404)
             return
 
@@ -23,7 +24,7 @@ class zz_index(RequestHandler):
             op = xhtml_escape(self.get_argument('op', 'index'))
             next = xhtml_escape(self.get_argument('next', './'))
         except:
-            self.get_error('/','10',u'error','toaza.com')
+            self.get_error('/', '10', u'error', 'toaza.com')
             return
 
         if op == 'index':
