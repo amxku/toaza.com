@@ -8,8 +8,9 @@ import tornado.web
 from tornado.escape import xhtml_escape
 from base import RequestHandler
 from site_sitting import *
-from helpers import clear2nbsp,pickle_loads,checkuserflag
-from model.testm import User,Article,Comment,Node,Noderelated,Log,Commentreid  # db model (sqlalchemy)
+from helpers import clear2nbsp, pickle_loads, checkuserflag
+from model.testm import User, Article, Comment, Node, Noderelated, Log, Commentreid
+# db model (sqlalchemy)
 
 class zz_index(RequestHandler):
     @tornado.web.authenticated
