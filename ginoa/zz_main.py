@@ -46,7 +46,7 @@ class zz_index(RequestHandler):
             nodes = Node().findall_by_nType('N',limit=Node().where('nType','=','N').count())
             for n in nodes:
                 Node().node_count_update(Noderelated().count_by_nid(n.nid),'N',n.nid)
-            self.get_error(next,'4',u'节点刷新完成','toaza.com')
+            self.get_error(next, '4', u'节点刷新完成', 'toaza.com')
             return
         elif op == 'flush_class_total':
             classs = Node().findall_by_nType('C',limit=Node().where('nType','=','C').count())
